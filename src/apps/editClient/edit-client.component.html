@@ -1,0 +1,76 @@
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="card shadow-lg p-4 glass-card" style="max-width: 1000px; width: 100%; border-radius: 15px;">
+    <h2 class="mb-4 text-center text-primary">Client bearbeiten</h2>
+
+    <form #clientForm="ngForm" (ngSubmit)="submit()" novalidate>
+      <!-- Nom -->
+      <div class="mb-3">
+        <label class="form-label custom-label">Geben Sie Ihren Name ein</label>
+        <input type="text" class="form-control custom-input" [(ngModel)]="client.nom" name="nom" required #nomCtrl="ngModel">
+        <div *ngIf="nomCtrl.invalid && nomCtrl.touched" class="text-danger mt-1">Name ist erforderlich.</div>
+      </div>
+
+      <!-- Prénom -->
+      <div class="mb-3">
+        <label class="form-label custom-label">Geben Sie Ihren Vornamen ein</label>
+        <input type="text" class="form-control custom-input" [(ngModel)]="client.prenom" name="prenom" required #prenomCtrl="ngModel">
+        <div *ngIf="prenomCtrl.invalid && prenomCtrl.touched" class="text-danger mt-1">Vorname ist erforderlich.</div>
+      </div>
+
+      <!-- Sexe -->
+      <div class="mb-3">
+        <label class="form-label custom-label">Geben Sie Ihr Geschlecht ein</label>
+        <select class="form-select custom-input" [(ngModel)]="client.sexe" name="sexe" required #sexeCtrl="ngModel">
+          <option value="">Wählen</option>
+          <option value="H">Mann</option>
+          <option value="F">Frauen</option>
+        </select>
+        <div *ngIf="sexeCtrl.invalid && sexeCtrl.touched" class="text-danger mt-1">Sex ist obligatorisch.</div>
+      </div>
+
+      <!-- Taille -->
+      <div class="mb-3">
+        <label class="form-label custom-label">Geben Sie Ihre Körpergröße (cm) ein</label>
+        <input type="number" class="form-control custom-input" [(ngModel)]="client.taille" name="taille" required min="1" max="272" #tailleCtrl="ngModel">
+        <div *ngIf="tailleCtrl.invalid && tailleCtrl.touched" class="text-danger mt-1">
+          <div *ngIf="tailleCtrl.errors?.['required']">Die Größe ist obligatorisch.</div>
+          <div *ngIf="tailleCtrl.errors?.['max']">Maximal 272 cm</div>
+          <div *ngIf="tailleCtrl.errors?.['min']">Min 1 cm</div>
+        </div>
+      </div>
+
+      <!-- Poids -->
+      <div class="mb-3">
+        <label class="form-label custom-label">Geben Sie Ihr Gewicht (kg) ein</label>
+        <input type="number" class="form-control custom-input" [(ngModel)]="client.poids" name="poids" required min="1" max="727" #poidsCtrl="ngModel">
+        <div *ngIf="poidsCtrl.invalid && poidsCtrl.touched" class="text-danger mt-1">
+          <div *ngIf="poidsCtrl.errors?.['required']">Das Gewicht ist obligatorisch.</div>
+          <div *ngIf="poidsCtrl.errors?.['max']">Max 727 kg</div>
+          <div *ngIf="poidsCtrl.errors?.['min']">Min 1 kg</div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary px-4 py-2 shadow-sm rounded-pill" [disabled]="clientForm.invalid">Speichern</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal confirmation -->
+<div class="modal-backdrop" *ngIf="showModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content shadow-lg rounded animate__animated animate__fadeInDown">
+      <div class="d-flex justify-content-between align-items-center border-bottom p-3">
+        <h4 class="mb-0">Änderungen gespeichert</h4>
+        <button type="button" class="btn-close" aria-label="Fermer" (click)="closeModal()"></button>
+      </div>
+      <div class="modal-body p-4">
+        <p>Die Daten des Clients wurden erfolgreich aktualisiert!</p>
+      </div>
+      <div class="text-center mb-3">
+        <button class="btn btn-primary px-4" (click)="closeModal()">Zurück zur Liste</button>
+      </div>
+    </div>
+  </div>
+</div>
