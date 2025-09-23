@@ -70,6 +70,7 @@ Die grundlegenden CRUD-Operationen (Create, Read, Update, Delete) finden an folg
    - Starte die Anwendung: ng serve.
 ## Verzeichnisstruktur
 meine Backend Projekt findet in salleyesmine statt.
-meiner frontend Projekt findet in src statt.
+
+meiner frontend Projekt findet in src/app statt.
 ## KI Verwendung
 ChatGPT in	Planung, Codeoptimierung, README
