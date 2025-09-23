@@ -1,0 +1,61 @@
+/* Body avec image de fond */
+/* Body avec image de fond */
+body {
+  background: url('assets/gym.webp') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Container centré verticalement et horizontalement */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* ou center si tu veux verticalement centré */
+  min-height: 100vh;
+  padding-top: 50px; /* espace depuis le haut de la page */
+}
+
+/* Carte avec effet glassmorphism */
+.card.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 3rem;
+  max-width: 800px;  /* largeur plus grande mais pas infinie */
+  width: 90%;        /* responsive */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Labels modernisés */
+.custom-label {
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+/* Inputs modernisés */
+.custom-input {
+  border-radius: 10px;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Effet focus sur inputs */
+.custom-input:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 8px rgba(13, 110, 253, 0.3);
+  outline: none;
+}
+
+/* Bouton stylé */
+.btn-primary {
+  background-color: #0d6efd;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+}
