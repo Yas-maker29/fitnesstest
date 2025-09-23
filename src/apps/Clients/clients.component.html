@@ -1,0 +1,43 @@
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="card shadow-lg p-4 glass-card" style="max-width: 1000px; width: 100%; border-radius: 15px;">
+    <h2 class="mb-4 text-center text-primary">📋 Kundenliste</h2>
+
+    <!-- Boutons d'action -->
+    <div class="d-flex justify-content-between mb-3">
+      <button class="btn btn-primary" (click)="goHome()">🏠 Willkommen</button>
+      <button class="btn btn-success" (click)="addClient()">➕ Neuer Kunde</button>
+    </div>
+
+    <table class="table table-striped align-middle text-center">
+      <thead class="table-primary">
+        <tr>
+          <th>#</th>
+          <th>Nachname</th>
+          <th>Vorname</th>
+          <th>Geschlecht</th>
+          <th>Größe (cm)</th>
+          <th>Gewicht (kg)</th>
+          <th>Aktionen</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of clients; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ c.nom }}</td>
+          <td>{{ c.prenom }}</td>
+          <td>{{ c.sexe }}</td>
+          <td>{{ c.taille }}</td>
+          <td>{{ c.poids }}</td>
+          <td>
+            <button class="btn btn-warning btn-sm me-2 px-3 rounded-pill shadow-sm" (click)="editClient(c)">
+              ✏️ Bearbeiten
+            </button>
+            <button class="btn btn-danger btn-sm px-3 rounded-pill shadow-sm" (click)="deleteClient(c._id)">
+              ❌ Löschen
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
