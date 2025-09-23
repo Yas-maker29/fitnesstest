@@ -1,0 +1,136 @@
+<!-- ===================== FORMULAIRE ===================== -->
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="card shadow-lg p-4 glass-card" style="max-width: 1000px; width: 100%; border-radius: 15px;">
+    <h2 class="mb-4 text-center text-primary">Fitness und Gesundheit Test </h2>
+
+    <!-- Boutons centrés -->
+    <div class="d-flex justify-content-center gap-3 mb-4">
+      <button class="btn btn-glass btn-home" (click)="goHome()">🏠 Willkommen</button>
+      <button class="btn btn-glass btn-list" (click)="goList()">📋 Kundenliste</button>
+    </div>
+
+    <form #clientForm="ngForm" (ngSubmit)="submit()" novalidate>
+      <!-- Nom -->
+      <div class="mb-3">
+        <label class="form-label custom-label">Geben Sie Ihren Name ein </label>
+        <input type="text" class="form-control custom-input" [(ngModel)]="client.nom" name="nom" required
+          #nomCtrl="ngModel">
+        <div *ngIf="nomCtrl.invalid && nomCtrl.touched" class="text-danger mt-1">Name ist erforderlich.</div>
+      </div>
+
+      <!-- Prénom -->
+      <div class="mb-3">
+        <label class="form-label custom-label">Geben Sie Ihren Vornamen ein</label>
+        <input type="text" class="form-control custom-input" [(ngModel)]="client.prenom" name="prenom" required
+          #prenomCtrl="ngModel">
+        <div *ngIf="prenomCtrl.invalid && prenomCtrl.touched" class="text-danger mt-1">Vorname ist erforderlich.</div>
+      </div>
+
+      <!-- Sexe -->
+      <div class="mb-3">
+        <label class="form-label custom-label">Geben Sie Ihr Geschlecht ein </label>
+        <select class="form-select custom-input" [(ngModel)]="client.sexe" name="sexe" required #sexeCtrl="ngModel">
+          <option value="">Wählen</option>
+          <option value="H">Mann</option>
+          <option value="F">Frauen</option>
+        </select>
+        <div *ngIf="sexeCtrl.invalid && sexeCtrl.touched" class="text-danger mt-1">Sex ist obligatorisch.</div>
+      </div>
+
+      <!-- Taille -->
+      <div class="mb-3">
+        <label class="form-label custom-label">Geben Sie Ihre Körpergröße (cm) ein</label>
+        <input type="number" class="form-control custom-input" [(ngModel)]="client.taille" name="taille" required
+          min="1" max="272" #tailleCtrl="ngModel">
+        <div *ngIf="tailleCtrl.invalid && tailleCtrl.touched" class="text-danger mt-1">
+          <div *ngIf="tailleCtrl.errors?.['required']">Die Größe ist obligatorisch.</div>
+          <div *ngIf="tailleCtrl.errors?.['max']">Die maximal zulässige Körpergröße beträgt 272 cm.</div>
+          <div *ngIf="tailleCtrl.errors?.['min']">Die Größe muss größer als 0 cm sein.</div>
+        </div>
+      </div>
+
+      <!-- Poids -->
+      <div class="mb-3">
+        <label class="form-label custom-label">Geben Sie Ihr Gewicht (kg) ein</label>
+        <input type="number" class="form-control custom-input" [(ngModel)]="client.poids" name="poids" required min="1"
+          max="727" #poidsCtrl="ngModel">
+        <div *ngIf="poidsCtrl.invalid && poidsCtrl.touched" class="text-danger mt-1">
+          <div *ngIf="poidsCtrl.errors?.['required']">Das Gewicht ist obligatorisch.</div>
+          <div *ngIf="poidsCtrl.errors?.['max']">Das maximal zulässige Gewicht beträgt 727 kg.</div>
+          <div *ngIf="poidsCtrl.errors?.['min']">Die Größe muss größer als 0 cm sein.</div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary px-4 py-2 shadow-sm rounded-pill" [disabled]="clientForm.invalid"
+          (click)="showModal = true">
+          Gefolgt
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ===================== POPUP ===================== -->
+<div class="modal-backdrop" *ngIf="showModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content shadow-lg rounded animate__animated animate__fadeInDown">
+
+      <!-- En-tête avec fermeture -->
+      <div class="d-flex justify-content-between align-items-center border-bottom p-3">
+        <h4 class="mb-0">Ihre Einschätzung</h4>
+        <button type="button" class="btn-close" aria-label="Fermer" (click)="showModal=false"></button>
+
+      </div>
+
+      <div class="modal-body p-4">
+        <p><strong>Aktuelles Gewicht :</strong> {{ client.poids }} kg</p>
+        <p><strong>Idealgewicht :</strong> {{ client.poidsIdeal | number:'1.0-1' }} kg</p>
+        <p><strong>Beratung :</strong> {{ client.conseil }}</p>
+      </div>
+
+      <div class="text-center mb-3">
+        <button class="btn btn-primary px-4" (click)="closeModal()">Weiter zu den Fragen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== STYLES ===================== -->
+<style>
+  .glass-card {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 1000;
+    position: relative;
+  }
+
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+  }
+
+  .modal-content {
+    background-color: #fff !important;
+    border-radius: 15px;
+    max-width: 500px;
+    width: 100%;
+    color: #000;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    position: relative;
+    z-index: 2001;
+  }
+
+  .modal-body p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+</style>
