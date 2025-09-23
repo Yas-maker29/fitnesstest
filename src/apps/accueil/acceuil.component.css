@@ -1,0 +1,22 @@
+h1 {
+  font-weight: bold;
+}
+
+button {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+/* styles.css ou component.css */
+.btn-form {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  color: white;
+}
+
+.btn-list {
+  background: linear-gradient(135deg, #43cea2, #185a9d);
+  color: white;
+}
